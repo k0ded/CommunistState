@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 
 namespace ConsoleGameAdventure
 {
@@ -7,74 +7,74 @@ namespace ConsoleGameAdventure
         private Random Rand = new Random();
         private int Index;
 
-        StatsHolder statsHolder = Program.statsHolder;
-        NeutralEvents neutralEvents = new NeutralEvents();
-        DayManager dayManager = new DayManager();
+        StatsHolder statsHolder;
+        DayManager dayManager;
+        NeutralEvents neutralEvents;
+
+        public BadEvents(StatsHolder holder, DayManager manager, NeutralEvents events)
+        {
+            statsHolder = holder;
+            dayManager = manager;
+            neutralEvents = events;
+        }
         
         //This method calls th diffrent events based on stability and just random
         public void Events()
         {
-         // Index = Rand.Next(0, 12) + 1;
-         Index = 1;
+            // Index = Rand.Next(0, 12) + 1;
+            Index = 1;
 
-          if (Index == 1 && statsHolder.Stability <= 100)
+            switch (Index)
             {
-                Strikes();
-            }
-            else if (Index == 2 && statsHolder.Stability <= 85)
-            {
-                Protests();
-            }
-            else if (Index == 3 && statsHolder.Stability <= 80)
-            {
-                RightUprisings();
-            }
-            else if (Index == 4 && statsHolder.Stability <= 70)
-            {
-                Riots();
-            }
-            else if (Index == 5 && statsHolder.Stability <= 50)
-            {
-                DesertionMilitary();
-            }
-            else if (Index == 6 && statsHolder.Stability <= 50)
-            {
-                InstabilityPolice();
-            }
-            else if (Index == 7 && statsHolder.InternationalRelation <= 30)
-            {
-                WarDeclaration();
-            }
-            else if (Index == 8 && statsHolder.Stability <= 30)
-            {
-                Rebellion();
-            }
-            else if (Index == 9 && statsHolder.Stability <= 50)
-            {
-                Boycott();
-            }
-            else if (Index == 10 && statsHolder.Stability <= 0)
-            {
-                CivilWar();
-            }
-            else if (Index == 11 && statsHolder.InternationalRelation <= 50)
-            {
-                Terrorism();
-            }
-            else if (Index == 12 && statsHolder.Stability <= 10)
-            {
-                Corruption();
-            }
-            else if (statsHolder.Stability < 90)
-            {
-                Events();
-            }
-           else 
-           {
-               neutralEvents.Events();
-           }
-           
-            
+                case 1 when statsHolder.Stability <= 100:
+                    Strikes();
+                    break;
+                case 2 when statsHolder.Stability <= 85:
+                    Protests();
+                    break;
+                case 3 when statsHolder.Stability <= 80:
+                    RightUprisings();
+                    break;
+                case 4 when statsHolder.Stability <= 70:
+                    Riots();
+                    break;
+                case 5 when statsHolder.Stability <= 50:
+                    DesertionMilitary();
+                    break;
+                case 6 when statsHolder.Stability <= 50: 
+                    InstabilityPolice(); 
+                    break;
+                case 7 when statsHolder.InternationalRelation <= 30:
+                    WarDeclaration(); 
+                    break;
+                case 8 when statsHolder.Stability <= 30:
+                    Rebellion();
+                    break;
+                case 9 when statsHolder.Stability <= 50:
+                    Boycott();
+                    break;
+                case 10 when statsHolder.Stability <= 0:
+                    CivilWar();
+                    break;
+                case 11 when statsHolder.InternationalRelation <= 50:
+                    Terrorism();
+                    break;
+                case 12 when statsHolder.Stability <= 10:
+                    Corruption();
+                    break;
+                default:
+                {
+                    if (statsHolder.Stability < 90)
+                    { 
+                        Events();
+                    }
+                    else 
+                    { 
+                        neutralEvents.Events();
+                    }
+                    break;
+                }
+             }
         }
 
         //After this comment is all the events stored for easy access
@@ -98,22 +98,20 @@ namespace ConsoleGameAdventure
 
             switch (input)
             {
-                case ("1"):
+                case "1":
                     statsHolder.Stability -= Rand.Next(0, 4) + 1;
                     break;
-                case ("2"):
+                case "2":
                     statsHolder.Stability += Rand.Next(0, 4) + 1;
                     statsHolder.GoodDescisions += 1;
                     break;
-                case ("3"):
+                case "3":
                     statsHolder.Stability -= Rand.Next(0, 10) + 1;
                     statsHolder.UnhappyPopulation += Rand.Next(0, 5) + 1;
                     break;
-                case ("4"):
+                case "4":
                     statsHolder.Stability -= Rand.Next(0, 10) + 1;
                     statsHolder.UnhappyPopulation += Rand.Next(0, 5) + 1;
-                    break;
-                default:
                     break;
             }
             dayManager.CreateGame();

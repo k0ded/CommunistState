@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 
 namespace ConsoleGameAdventure
 {
@@ -50,7 +50,7 @@ namespace ConsoleGameAdventure
 
             UnhappyPopulation = Rand.Next(1, 100) + 1;
 
-            Date = (Rand.Next(0, 12) + 1) + "/" + (Rand.Next(0, 30) + 1) + "/" + "1950";
+            Date = Rand.Next(0, 12) + 1 + "/" + (Rand.Next(0, 30) + 1) + "/" + "1950";
         }
     }
 }

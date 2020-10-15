@@ -1,14 +1,20 @@
-﻿﻿using System;
+﻿using System;
 
 namespace ConsoleGameAdventure
 {
     public class DayManager
     {
-        StatsHolder statsHolder = Program.statsHolder;
-        BadEvents badEvents = new BadEvents();
-        NeutralEvents neutralEvents = new NeutralEvents();
+        private StatsHolder statsHolder = Program.StatsHolderInstance;
+        public NeutralEvents neutralEvents;
+        public BadEvents badEvents;
 
         private Random Rand = new Random();
+
+        public DayManager()
+        {
+            neutralEvents = new NeutralEvents();
+            badEvents = new BadEvents(statsHolder, this, neutralEvents);
+        }
 
         public void StartGame()
         {
@@ -30,19 +36,17 @@ namespace ConsoleGameAdventure
         public void NextDay()
         {
             
-            StatBar();
-           int index = Rand.Next(0, 2) + 1;
-
-           switch (index)
-           {
-               case (1):
-                   neutralEvents.Events();
-                   break;
-               case (2):
-                   badEvents.Events();
-                   break;
-               default:
-                   break;
+            StatBar(); 
+            int index = Rand.Next(0, 2) + 1;
+            
+            switch (index)
+            { 
+                case 1:
+                    neutralEvents.Events();
+                    break;
+                case 2:
+                    badEvents.Events();
+                    break;
            }
         }
     }

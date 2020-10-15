@@ -1,11 +1,11 @@
-﻿﻿using System;
-using System.Threading;
+﻿using System;
 
 namespace ConsoleGameAdventure
 {
     public class StoryBoard
     {
-        DayManager dayManager = new DayManager();
+        public DayManager DayManagerInstance = new DayManager();
+        
         public void Tutorial()
         {
             string s = @"You are a communist leader of a communist state. Your descisions affect your popularity.
@@ -39,7 +39,7 @@ namespace ConsoleGameAdventure
             }
             else if (input == "2")
             {
-                dayManager.CreateGame();
+                DayManagerInstance.CreateGame();
             }
             else
             {
@@ -62,7 +62,7 @@ namespace ConsoleGameAdventure
             Console.WriteLine("");
             Console.WriteLine("Press any key to procede");
             Console.ReadKey();
-            dayManager.CreateGame();
+            DayManagerInstance.CreateGame();
         }
     }
 }
